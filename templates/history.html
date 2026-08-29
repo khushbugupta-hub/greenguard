@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Prediction History - GreenGuard</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-icon">🌿</div>
+      <div>
+        <div class="brand-text-main">GreenGuard</div>
+        <div class="brand-text-sub">Smart Tree Health Monitoring</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a class="nav-item" href="/dashboard">Dashboard</a>
+      <a class="nav-item" href="/upload">Predict Disease</a>
+      <a class="nav-item active" href="/history">History</a>
+      <a class="nav-item" href="/logout">Logout</a>
+    </nav>
+
+    <div class="side-quote">
+      <p>Take care of trees,<br>they will take care of us.</p>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="greet-row">
+      <h1>Prediction History</h1>
+      <p>View all your past leaf analysis results</p>
+    </div>
+
+    <div class="table-card">
+      {% if records|length == 0 %}
+        <div class="empty-state">No predictions yet. Upload a leaf image to get started!</div>
+      {% else %}
+      <table>
+        <thead>
+          <tr><th>Image</th><th>Result</th><th>Confidence</th><th>Date</th></tr>
+        </thead>
+        <tbody>
+          {% for record in records %}
+          <tr>
+            <td><img src="/{{ record[0] }}" class="history-thumb"></td>
+            <td>
+              {% if 'healthy' in record[1]|lower %}
+                <span class="badge-healthy">Healthy</span>
+              {% else %}
+                <span class="badge-diseased">{{ record[1].replace('_', ' ') }}</span>
+              {% endif %}
+            </td>
+            <td>{{ record[2] }}%</td>
+            <td>{{ record[3] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+  </main>
+</div>
+</body>
+</html>

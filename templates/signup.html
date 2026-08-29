@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sign Up - GreenGuard</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+<div class="auth-wrap">
+  <div class="auth-side">
+    <div class="auth-side-content">
+      <div class="auth-brand">
+        <div class="auth-brand-icon">🌿</div>
+        <div class="auth-brand-text">GreenGuard</div>
+      </div>
+      <h2>Join GreenGuard Today</h2>
+      <p>Create an account to start detecting tree diseases instantly with AI and keep your trees healthy.</p>
+    </div>
+    <div class="auth-deco">🌱</div>
+  </div>
+
+  <div class="auth-form-side">
+    <div class="auth-box">
+      <h1>Create Account</h1>
+      <p class="auth-sub">Join GreenGuard today</p>
+
+      <form method="POST" action="/signup">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" name="name" placeholder="Enter your full name" required>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="password" placeholder="Create a password" required>
+        </div>
+        <button type="submit" class="btn-primary auth-submit">Sign Up</button>
+      </form>
+
+      <p class="auth-footer">Already have an account? <a href="/login">Login</a></p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

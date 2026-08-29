@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard - GreenGuard</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-icon">🌿</div>
+      <div>
+        <div class="brand-text-main">GreenGuard</div>
+        <div class="brand-text-sub">Smart Tree Health Monitoring</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a class="nav-item" href="/dashboard">Dashboard</a>
+      <a class="nav-item" href="/upload">Predict Disease</a>
+      <a class="nav-item" href="/history">History</a>
+      <a class="nav-item active" href="/admin">Admin Panel</a>
+      <a class="nav-item" href="/logout">Logout</a>
+    </nav>
+
+    <div class="side-quote">
+      <p>Take care of trees,<br>they will take care of us.</p>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="greet-row">
+      <h1>Admin Dashboard</h1>
+      <p>Overview of all users and predictions on GreenGuard</p>
+    </div>
+
+    <div class="stats" style="grid-template-columns:1fr 1fr;">
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-label">Total Users</span>
+          <div class="stat-icon icon-blue">👤</div>
+        </div>
+        <p class="stat-value">{{ total_users }}</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-label">Total Predictions</span>
+          <div class="stat-icon icon-green">🌿</div>
+        </div>
+        <p class="stat-value">{{ total_predictions }}</p>
+      </div>
+    </div>
+
+    <div class="admin-grid">
+      <div>
+        <div class="section-head"><h2>All Users</h2></div>
+        <div class="table-card">
+          <table>
+            <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th></tr></thead>
+            <tbody>
+              {% for user in users %}
+              <tr>
+                <td>{{ user[0] }}</td>
+                <td>{{ user[1] }}</td>
+                <td>{{ user[2] }}</td>
+                <td>{{ user[4] }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+            <div>
+        <div class="section-head"><h2>Recent Predictions</h2></div>
+        <div class="table-card">
+          <table>
+            <thead><tr><th>User ID</th><th>Disease</th><th>Confidence</th><th>Date</th></tr></thead>
+            <tbody>
+              {% for pred in predictions %}
+              <tr>
+                <td>{{ pred[0] }}</td>
+                <td>{{ pred[1].replace('_', ' ') }}</td>
+                <td>{{ pred[2] }}%</td>
+                <td>{{ pred[3] }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>
