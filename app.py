@@ -39,6 +39,10 @@ with open('model/class_labels.json', 'r') as f:
 def home():
     return "GreenGuard is running!"
 
+@app.route('/debug-env')
+def debug_env():
+    return f"MYSQL_HOST = {os.getenv('MYSQL_HOST')}"
+
 # ---------- SIGNUP ----------
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
