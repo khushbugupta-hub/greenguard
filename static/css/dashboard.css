@@ -263,3 +263,23 @@ tr:last-child td{ border-bottom:none; }
 /* Admin dashboard */
 .admin-grid{ display:grid; grid-template-columns:1fr 1fr; gap:22px; align-items:start; }
 @media (max-width: 980px){ .admin-grid{ grid-template-columns:1fr; } }
+/* Scan button */
+.scan-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin-top:14px;
+  padding:12px 20px;
+  background:var(--white);
+  border:1.8px solid var(--green);
+  color:var(--green-dark);
+  font-family:'Inter',sans-serif;
+  font-weight:600;
+  font-size:13.5px;
+  border-radius:10px;
+  cursor:pointer;
+  transition: background .15s ease;
+}
+.scan-btn:hover{ background:var(--green-light); }
+.scan-btn svg{ width:16px; height:16px; }

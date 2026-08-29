@@ -43,6 +43,13 @@
           <p class="dropzone-sub">JPG, JPEG, PNG (Max 5MB)</p>
           <input type="file" name="leaf_image" id="fileInput" accept="image/*" required hidden>
         </label>
+
+        <button type="button" class="scan-btn" id="scanBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7V5a1 1 0 011-1h2M4 17v2a1 1 0 001 1h2M20 7V5a1 1 0 00-1-1h-2M20 17v2a1 1 0 01-1 1h-2"/><circle cx="12" cy="12" r="3.5"/></svg>
+          Scan with Camera
+        </button>
+        <input type="file" id="cameraInput" accept="image/*" capture="environment" hidden>
+
         <p id="fileName" class="filename-preview"></p>
         <button type="submit" class="btn-primary" style="width:100%; justify-content:center; margin-top:6px;">Analyze Leaf</button>
       </form>
@@ -52,12 +59,25 @@
 
 <script>
   const fileInput = document.getElementById('fileInput');
+  const cameraInput = document.getElementById('cameraInput');
+  const scanBtn = document.getElementById('scanBtn');
   const dropzone = document.getElementById('dropzone');
   const fileName = document.getElementById('fileName');
 
   fileInput.addEventListener('change', () => {
     if (fileInput.files.length > 0) {
       fileName.textContent = "Selected: " + fileInput.files[0].name;
+    }
+  });
+
+  scanBtn.addEventListener('click', () => {
+    cameraInput.click();
+  });
+
+  cameraInput.addEventListener('change', () => {
+    if (cameraInput.files.length > 0) {
+      fileInput.files = cameraInput.files;
+      fileName.textContent = "Scanned: " + cameraInput.files[0].name;
     }
   });
 
