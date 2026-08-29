@@ -283,3 +283,55 @@ tr:last-child td{ border-bottom:none; }
 }
 .scan-btn:hover{ background:var(--green-light); }
 .scan-btn svg{ width:16px; height:16px; }
+/* Landing page */
+.landing{ min-height:100vh; background:var(--bg); }
+.landing-nav{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:20px 44px;
+}
+.landing-brand{ display:flex; align-items:center; gap:10px; }
+.landing-brand-icon{ width:38px; height:38px; border-radius:10px; background:var(--green-light); display:flex; align-items:center; justify-content:center; font-size:19px; }
+.landing-brand-text{ font-family:'Poppins',sans-serif; font-weight:700; font-size:18px; color:var(--text); }
+.landing-nav-links{ display:flex; gap:12px; }
+.btn-outline{
+  padding:10px 20px; border-radius:10px; font-weight:600; font-size:13.5px;
+  border:1.6px solid var(--green); color:var(--green-dark); background:transparent;
+  cursor:pointer;
+}
+
+.landing-hero{
+  display:flex; align-items:center; gap:50px;
+  padding:60px 44px 80px; max-width:1180px; margin:0 auto;
+}
+.landing-hero-text{ flex:1; }
+.landing-hero-text h1{ font-family:'Poppins',sans-serif; font-size:38px; font-weight:700; line-height:1.25; margin:0 0 16px; }
+.landing-hero-text span{ color:var(--green-dark); }
+.landing-hero-text p{ font-size:15px; color:var(--muted);
+/* Error pages */
+.error-page{
+  min-height:100vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center;
+  padding:20px; background:var(--bg);
+}
+.error-page .icon{ font-size:60px; margin-bottom:16px; }
+.error-page h1{ font-family:'Poppins',sans-serif; font-size:26px; margin:0 0 10px; }
+.error-page p{ color:var(--muted); font-size:14px; margin:0 0 24px; max-width:360px; }
+/* Loading overlay */
+.loading-overlay{
+  display:none;
+  position:fixed; inset:0;
+  background:rgba(15,25,20,0.75);
+  z-index:999;
+  align-items:center; justify-content:center;
+  flex-direction:column; gap:16px;
+}
+.loading-overlay.active{ display:flex; }
+.spinner{
+  width:48px; height:48px;
+  border:4px solid rgba(255,255,255,0.25);
+  border-top-color:var(--green);
+  border-radius:50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin{ to{ transform:rotate(360deg); } }
+.loading-overlay p{ color:#fff; font-size:14px; font-weight:600; }

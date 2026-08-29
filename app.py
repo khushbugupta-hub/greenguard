@@ -38,7 +38,19 @@ with open('model/class_labels.json', 'r') as f:
 
 @app.route('/')
 def home():
-    return "GreenGuard is running!"
+    return render_template('index.html')
+
+@app.route('/favicon.ico')
+def favicon():
+    return '', 204@app.route('/favicon.ico')
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def server_error(e):
+    return render_template('500.html'), 500
 
 @app.route('/debug-env')
 def debug_env():

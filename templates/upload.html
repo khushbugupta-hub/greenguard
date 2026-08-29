@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Predict Disease - GreenGuard</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
 </head>
 <body>
 <div class="app">
@@ -57,12 +58,19 @@
   </main>
 </div>
 
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <p>Analyzing your leaf...</p>
+</div>
+
 <script>
   const fileInput = document.getElementById('fileInput');
   const cameraInput = document.getElementById('cameraInput');
   const scanBtn = document.getElementById('scanBtn');
   const dropzone = document.getElementById('dropzone');
   const fileName = document.getElementById('fileName');
+  const uploadForm = document.getElementById('uploadForm');
+  const loadingOverlay = document.getElementById('loadingOverlay');
 
   fileInput.addEventListener('change', () => {
     if (fileInput.files.length > 0) {
@@ -95,6 +103,10 @@
     if (fileInput.files.length > 0) {
       fileName.textContent = "Selected: " + fileInput.files[0].name;
     }
+  });
+
+  uploadForm.addEventListener('submit', () => {
+    loadingOverlay.classList.add('active');
   });
 </script>
 </body>
