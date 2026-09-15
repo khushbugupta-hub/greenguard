@@ -17,7 +17,6 @@ import tensorflow as tf
 import numpy as np
 from tensorflow.keras.preprocessing import image
 import json
-import os
 
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', 'greenguard_secret_key')
@@ -36,13 +35,17 @@ model = tf.keras.models.load_model('model/greenguard_model.h5')
 with open('model/class_labels.json', 'r') as f:
     class_labels = json.load(f)
 
+# Disease name ke underscores ko spaces mein convert karne ke liye
+def format_disease_name(name):
+    return name.replace('_', ' ')
+
 @app.route('/')
 def home():
     return render_template('index.html')
 
 @app.route('/favicon.ico')
 def favicon():
-    return '', 204@app.route('/favicon.ico')
+    return '', 204
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -96,22 +99,43 @@ def login():
 
     return render_template('login.html')
 
+# ---------- DASHBOARD ----------
 @app.route('/dashboard')
 def dashboard():
     if 'user_id' not in session:
         return redirect('/login')
 
     cur = mysql.connection.cursor()
+
+    # Total predictions
+    cur.execute("SELECT COUNT(*) FROM predictions WHERE user_id = %s", (session['user_id'],))
+    total_predictions = cur.fetchone()[0]
+
+    # Healthy count
+    cur.execute("SELECT COUNT(*) FROM predictions WHERE user_id = %s AND predicted_class LIKE '%%healthy%%'", (session['user_id'],))
+    healthy_count = cur.fetchone()[0]
+
+    # Diseased count
+    cur.execute("SELECT COUNT(*) FROM predictions WHERE user_id = %s AND predicted_class NOT LIKE '%%healthy%%'", (session['user_id'],))
+    diseased_count = cur.fetchone()[0]
+
+    # Recent alerts (display ke liye limited)
     cur.execute("""
         SELECT predicted_class, confidence, prediction_date 
         FROM predictions 
         WHERE user_id = %s AND predicted_class NOT LIKE '%%healthy%%'
         ORDER BY prediction_date DESC LIMIT 3
     """, (session['user_id'],))
-    alerts = cur.fetchall()
+    alerts_raw = cur.fetchall()
+    alerts = [(format_disease_name(row[0]), row[1], row[2]) for row in alerts_raw]
     cur.close()
 
-    return render_template('dashboard.html', user_name=session['user_name'], alerts=alerts)
+    return render_template('dashboard.html',
+                            user_name=session['user_name'],
+                            alerts=alerts,
+                            total_predictions=total_predictions,
+                            healthy_count=healthy_count,
+                            diseased_count=diseased_count)
 
 # ---------- UPLOAD PAGE ----------
 @app.route('/upload')
@@ -158,29 +182,28 @@ def predict():
         mysql.connection.commit()
         cur.close()
 
-    return render_template('result.html', prediction=predicted_class, confidence=confidence, 
+    return render_template('result.html', prediction=predicted_class, confidence=confidence,
                         image_path='/' + filepath, disease_info=disease_info)
-def dashboard():
-    if 'user_id' not in session:
-        return redirect('/login')
-    return render_template('dashboard.html', user_name=session['user_name'])
 
-
+# ---------- LOGOUT ----------
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect('/login')
 
+# ---------- HISTORY ----------
 @app.route('/history')
 def history():
     if 'user_id' not in session:
         return redirect('/login')
     cur = mysql.connection.cursor()
     cur.execute("SELECT image_path, predicted_class, confidence, prediction_date FROM predictions WHERE user_id = %s ORDER BY prediction_date DESC", (session['user_id'],))
-    records = cur.fetchall()
+    records_raw = cur.fetchall()
+    records = [(row[0], format_disease_name(row[1]), row[2], row[3]) for row in records_raw]
     cur.close()
     return render_template('history.html', records=records)
 
+# ---------- ADMIN ----------
 @app.route('/admin')
 def admin_dashboard():
     if 'user_id' not in session:
