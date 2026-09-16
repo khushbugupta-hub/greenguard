@@ -130,12 +130,15 @@ def dashboard():
     alerts = [(format_disease_name(row[0]), row[1], row[2]) for row in alerts_raw]
     cur.close()
 
+    model_accuracy = 92.4  # CNN model ki training/test accuracy (static)
+
     return render_template('dashboard.html',
                             user_name=session['user_name'],
                             alerts=alerts,
                             total_predictions=total_predictions,
                             healthy_count=healthy_count,
-                            diseased_count=diseased_count)
+                            diseased_count=diseased_count,
+                            accuracy=model_accuracy)
 
 # ---------- UPLOAD PAGE ----------
 @app.route('/upload')
@@ -182,8 +185,10 @@ def predict():
         mysql.connection.commit()
         cur.close()
 
-    return render_template('result.html', prediction=predicted_class, confidence=confidence,
-                        image_path='/' + filepath, disease_info=disease_info)
+    web_path = '/' + filepath.replace('\\', '/')
+
+    return render_template('result.html', prediction=format_disease_name(predicted_class), confidence=confidence,
+                        image_path=web_path, disease_info=disease_info)
 
 # ---------- LOGOUT ----------
 @app.route('/logout')
@@ -199,7 +204,14 @@ def history():
     cur = mysql.connection.cursor()
     cur.execute("SELECT image_path, predicted_class, confidence, prediction_date FROM predictions WHERE user_id = %s ORDER BY prediction_date DESC", (session['user_id'],))
     records_raw = cur.fetchall()
-    records = [(row[0], format_disease_name(row[1]), row[2], row[3]) for row in records_raw]
+
+    records = []
+    for row in records_raw:
+        path = row[0].replace('\\', '/')
+        if not path.startswith('/'):
+            path = '/' + path
+        records.append((path, format_disease_name(row[1]), row[2], row[3]))
+
     cur.close()
     return render_template('history.html', records=records)
 

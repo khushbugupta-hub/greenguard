@@ -55,7 +55,7 @@
           <span class="stat-label">Diseased Trees</span>
           <div class="stat-icon icon-red">⚠</div>
         </div>
-        <p class="stat-value">{{ alerts|length }}</p>
+        <p class="stat-value">{{ diseased_count|default(0) }}</p>
       </div>
       <div class="stat-card">
         <div class="stat-top">
