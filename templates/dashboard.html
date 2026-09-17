@@ -6,30 +6,14 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
 <style>
-  .topbar { display: flex; justify-content: flex-end; align-items: center; margin-bottom: -10px; position: relative; }
-  .profile-wrap { position: relative; }
-  .avatar-btn {
+  .topbar { display: flex; justify-content: flex-end; align-items: center; margin-bottom: -10px; }
+  .avatar-link {
     width: 42px; height: 42px; border-radius: 50%;
     background: #1f5c33; color: #fff; font-weight: 700; font-size: 1.1rem;
     display: flex; align-items: center; justify-content: center;
-    cursor: pointer; border: none; user-select: none;
+    text-decoration: none;
   }
-  .avatar-btn:hover { background: #164726; }
-  .profile-dropdown {
-    display: none;
-    position: absolute; right: 0; top: 52px;
-    background: #fff; border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    width: 240px; padding: 16px; z-index: 100;
-  }
-  .profile-dropdown.open { display: block; }
-  .profile-dropdown .p-name { font-weight: 700; font-size: 1rem; color: #14301f; }
-  .profile-dropdown .p-email { font-size: 0.85rem; color: #6b7d72; margin-bottom: 12px; word-break: break-all; }
-  .profile-dropdown .p-row {
-    display: flex; justify-content: space-between;
-    font-size: 0.85rem; color: #33443a; padding: 6px 0;
-    border-top: 1px solid #eef2ef;
-  }
+  .avatar-link:hover { background: #164726; }
 </style>
 </head>
 <body>
@@ -44,7 +28,7 @@
     </div>
 
     <nav class="nav">
-      <a class="nav-item" href="#" onclick="openProfileFromSidebar(event)">Profile</a>
+      <a class="nav-item" href="/profile">Profile</a>
       <a class="nav-item active" href="/dashboard">Dashboard</a>
       <a class="nav-item" href="/upload">Predict Disease</a>
       <a class="nav-item" href="/history">History</a>
@@ -58,17 +42,7 @@
 
   <main class="main">
     <div class="topbar">
-      <div class="profile-wrap">
-        <button class="avatar-btn" onclick="document.getElementById('profileDropdown').classList.toggle('open')">
-          {{ user_name[0]|upper }}
-        </button>
-        <div class="profile-dropdown" id="profileDropdown">
-          <div class="p-name">{{ user_name }}</div>
-          <div class="p-email">{{ user_email }}</div>
-          <div class="p-row"><span>Total Scans</span><span>{{ total_predictions|default(0) }}</span></div>
-          <div class="p-row"><span>Joined On</span><span>{{ join_date }}</span></div>
-        </div>
-      </div>
+      <a href="/profile" class="avatar-link">{{ user_name[0]|upper }}</a>
     </div>
 
     <div class="greet-row">
@@ -143,23 +117,5 @@
     </div>
   </main>
 </div>
-
-<script>
-  // Dropdown ke bahar click karne pe close ho jaye
-  document.addEventListener('click', function(e) {
-    const wrap = document.querySelector('.profile-wrap');
-    const dropdown = document.getElementById('profileDropdown');
-    if (wrap && !wrap.contains(e.target)) {
-      dropdown.classList.remove('open');
-    }
-  });
-
-  // Sidebar 'Profile' link click karne pe dropdown khole aur upar scroll kare
-  function openProfileFromSidebar(e) {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    document.getElementById('profileDropdown').classList.add('open');
-  }
-</script>
 </body>
 </html>

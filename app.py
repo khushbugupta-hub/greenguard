@@ -128,13 +128,6 @@ def dashboard():
     """, (session['user_id'],))
     alerts_raw = cur.fetchall()
     alerts = [(format_disease_name(row[0]), row[1], row[2]) for row in alerts_raw]
-
-    # Profile info (email + join date)
-    cur.execute("SELECT email, created_at FROM users WHERE id = %s", (session['user_id'],))
-    user_row = cur.fetchone()
-    user_email = user_row[0]
-    join_date = user_row[1].strftime('%d %b %Y') if user_row[1] else 'N/A'
-
     cur.close()
 
     model_accuracy = 92.4  # CNN model ki training/test accuracy (static)
@@ -145,9 +138,68 @@ def dashboard():
                             total_predictions=total_predictions,
                             healthy_count=healthy_count,
                             diseased_count=diseased_count,
-                            accuracy=model_accuracy,
+                            accuracy=model_accuracy)
+
+# ---------- PROFILE ----------
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
+    if 'user_id' not in session:
+        return redirect('/login')
+
+    cur = mysql.connection.cursor()
+    message = None  # (type, text) — type is 'success' ya 'error'
+
+    if request.method == 'POST':
+        action = request.form.get('action')
+
+        if action == 'update_name':
+            new_name = request.form['name'].strip()
+            if new_name:
+                cur.execute("UPDATE users SET name = %s WHERE id = %s", (new_name, session['user_id']))
+                mysql.connection.commit()
+                session['user_name'] = new_name
+                message = ('success', 'Name updated successfully.')
+
+        elif action == 'change_password':
+            current_password = request.form['current_password']
+            new_password = request.form['new_password']
+            cur.execute("SELECT password FROM users WHERE id = %s", (session['user_id'],))
+            stored_hash = cur.fetchone()[0]
+            if check_password_hash(stored_hash, current_password):
+                new_hash = generate_password_hash(new_password)
+                cur.execute("UPDATE users SET password = %s WHERE id = %s", (new_hash, session['user_id']))
+                mysql.connection.commit()
+                message = ('success', 'Password changed successfully.')
+            else:
+                message = ('error', 'Current password is incorrect.')
+
+    # Profile info
+    cur.execute("SELECT name, email, created_at FROM users WHERE id = %s", (session['user_id'],))
+    user_row = cur.fetchone()
+    user_name = user_row[0]
+    user_email = user_row[1]
+    join_date = user_row[2].strftime('%d %b %Y') if user_row[2] else 'N/A'
+
+    # Stats
+    cur.execute("SELECT COUNT(*) FROM predictions WHERE user_id = %s", (session['user_id'],))
+    total_predictions = cur.fetchone()[0]
+
+    cur.execute("SELECT COUNT(*) FROM predictions WHERE user_id = %s AND predicted_class LIKE '%%healthy%%'", (session['user_id'],))
+    healthy_count = cur.fetchone()[0]
+
+    cur.execute("SELECT COUNT(*) FROM predictions WHERE user_id = %s AND predicted_class NOT LIKE '%%healthy%%'", (session['user_id'],))
+    diseased_count = cur.fetchone()[0]
+
+    cur.close()
+
+    return render_template('profile.html',
+                            user_name=user_name,
                             user_email=user_email,
-                            join_date=join_date)
+                            join_date=join_date,
+                            total_predictions=total_predictions,
+                            healthy_count=healthy_count,
+                            diseased_count=diseased_count,
+                            message=message)
 
 # ---------- UPLOAD PAGE ----------
 @app.route('/upload')
@@ -216,8 +268,6 @@ def history():
 
     records = []
     for row in records_raw:
-        # history.html khud '/' add karta hai src="/{{ record[0] }}" mein,
-        # isliye yahan leading slash hatana zaroori hai (warna // ban jayega)
         path = row[0].replace('\\', '/').lstrip('/')
         records.append((path, row[1], row[2], row[3]))
 
