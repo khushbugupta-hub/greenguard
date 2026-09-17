@@ -207,10 +207,10 @@ def history():
 
     records = []
     for row in records_raw:
-        path = row[0].replace('\\', '/')
-        if not path.startswith('/'):
-            path = '/' + path
-        records.append((path, format_disease_name(row[1]), row[2], row[3]))
+        # history.html khud '/' add karta hai src="/{{ record[0] }}" mein,
+        # isliye yahan leading slash hatana zaroori hai (warna // ban jayega)
+        path = row[0].replace('\\', '/').lstrip('/')
+        records.append((path, row[1], row[2], row[3]))
 
     cur.close()
     return render_template('history.html', records=records)
