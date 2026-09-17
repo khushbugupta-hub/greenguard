@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>GreenGuard - Smart Tree Health Monitoring</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
 </head>
 <body>
@@ -11,42 +11,44 @@
 
   <nav class="landing-nav">
     <div class="landing-brand">
-      <div class="landing-brand-icon">🌿</div>
+      <div class="landing-brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#eaf3de" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 11 13 11 11"/></svg>
+      </div>
       <div class="landing-brand-text">GreenGuard</div>
     </div>
     <div class="landing-nav-links">
-      <a href="/login"><button class="btn-outline">Login</button></a>
-      <a href="/signup"><button class="btn-primary">Sign Up</button></a>
+      <a href="/login"><button class="btn-outline">Log in</button></a>
+      <a href="/signup"><button class="btn-primary">Sign up</button></a>
     </div>
   </nav>
 
   <section class="landing-hero">
-    <div class="landing-hero-text">
-      <div class="hero-eyebrow">🌿 AI-Powered Plant Care</div>
-      <h1>AI-Powered Protection for <span>a Greener Tomorrow</span></h1>
-      <p>Detect tree diseases instantly with AI, get expert recommendations, and keep your trees healthy — from anywhere, on any device.</p>
-      <a href="/signup"><button class="btn-primary">Get Started</button></a>
-
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="hero-stat-num">97%</div>
-          <div class="hero-stat-label">Accuracy</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">&lt;5s</div>
-          <div class="hero-stat-label">Detection Time</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">24/7</div>
-          <div class="hero-stat-label">Access</div>
-        </div>
-      </div>
+    <div class="hero-eyebrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>
+      AI-powered plant diagnostics
     </div>
+    <h1>Catch tree disease <span>before it spreads</span></h1>
+    <p>Upload a leaf photo and get an instant, lab-grade diagnosis with treatment steps — built on a trained vision model.</p>
+    <a href="/signup">
+      <button class="btn-primary">
+        Get started
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </a>
 
-    <div class="landing-hero-visual">
-      <div class="visual-glow"></div>
-      <div class="visual-ring"></div>
-      <div class="visual-emoji">🌳</div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">97%</div>
+        <div class="hero-stat-label">Accuracy</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">&lt;5s</div>
+        <div class="hero-stat-label">Detection time</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">24/7</div>
+        <div class="hero-stat-label">Access</div>
+      </div>
     </div>
   </section>
 
@@ -55,24 +57,32 @@
     <h2>Why GreenGuard?</h2>
     <div class="features-grid">
       <div class="feature-card">
-        <div class="icon">🤖</div>
-        <h3>AI Powered</h3>
-        <p>Accurate disease detection using a trained CNN model</p>
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#3b6d11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a9 9 0 0 0-9 9c0 3.5 2 6.5 5 8l1-4-3-3 4-1 2-4 2 4 4 1-3 3 1 4c3-1.5 5-4.5 5-8a9 9 0 0 0-9-9Z"/></svg>
+        </div>
+        <h3>AI powered</h3>
+        <p>Accurate disease detection using a trained CNN model.</p>
       </div>
       <div class="feature-card">
-        <div class="icon">⚡</div>
-        <h3>Instant Results</h3>
-        <p>Get fast and reliable predictions in seconds</p>
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#3b6d11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg>
+        </div>
+        <h3>Instant results</h3>
+        <p>Get fast and reliable predictions in seconds.</p>
       </div>
       <div class="feature-card">
-        <div class="icon">📋</div>
-        <h3>Expert Recommendations</h3>
-        <p>Detailed causes, symptoms, and treatments</p>
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#3b6d11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3>Expert recommendations</h3>
+        <p>Detailed causes, symptoms, and treatments.</p>
       </div>
       <div class="feature-card">
-        <div class="icon">📊</div>
-        <h3>Track History</h3>
-        <p>Keep records of all your past predictions</p>
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#3b6d11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg>
+        </div>
+        <h3>Track history</h3>
+        <p>Keep records of all your past predictions.</p>
       </div>
     </div>
   </section>
