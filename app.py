@@ -128,6 +128,13 @@ def dashboard():
     """, (session['user_id'],))
     alerts_raw = cur.fetchall()
     alerts = [(format_disease_name(row[0]), row[1], row[2]) for row in alerts_raw]
+
+    # Profile info (email + join date)
+    cur.execute("SELECT email, created_at FROM users WHERE id = %s", (session['user_id'],))
+    user_row = cur.fetchone()
+    user_email = user_row[0]
+    join_date = user_row[1].strftime('%d %b %Y') if user_row[1] else 'N/A'
+
     cur.close()
 
     model_accuracy = 92.4  # CNN model ki training/test accuracy (static)
@@ -138,7 +145,9 @@ def dashboard():
                             total_predictions=total_predictions,
                             healthy_count=healthy_count,
                             diseased_count=diseased_count,
-                            accuracy=model_accuracy)
+                            accuracy=model_accuracy,
+                            user_email=user_email,
+                            join_date=join_date)
 
 # ---------- UPLOAD PAGE ----------
 @app.route('/upload')
