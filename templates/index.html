@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>GreenGuard - Smart Tree Health Monitoring</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
 </head>
@@ -86,6 +89,61 @@
       </div>
     </div>
   </section>
+
+  <section class="landing-how">
+    <div class="section-eyebrow">HOW IT WORKS</div>
+    <h2>Three steps to a healthier tree</h2>
+    <div class="how-grid">
+      <div class="how-step">
+        <div class="how-num">01</div>
+        <h3>Upload a photo</h3>
+        <p>Take a clear picture of the leaf you're concerned about and upload it — no special equipment needed.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-num">02</div>
+        <h3>AI analyzes it</h3>
+        <p>Our trained CNN model scans the image and identifies the disease pattern in under five seconds.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-num">03</div>
+        <h3>Get your diagnosis</h3>
+        <p>Receive the disease name, confidence score, and a full treatment plan — causes, symptoms, and cure.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="landing-about">
+    <div class="about-inner">
+      <div class="section-eyebrow">OUR MISSION</div>
+      <h2>Built to catch problems before they spread</h2>
+      <p>Plant diseases are often visible on leaves long before they cause serious damage — but spotting them early takes a trained eye. GreenGuard puts that expertise in your pocket, using a convolutional neural network trained to recognize disease patterns across common crops, so you can act early and protect your trees.</p>
+    </div>
+  </section>
+
+  <section class="landing-cta">
+    <h2>Ready to protect your trees?</h2>
+    <p>Create a free account and run your first diagnosis in under a minute.</p>
+    <a href="/signup">
+      <button class="btn-primary btn-light">
+        Get started free
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </a>
+  </section>
+
+  <footer class="landing-footer">
+    <div class="footer-brand">
+      <div class="landing-brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#eaf3de" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 11 13 11 11"/></svg>
+      </div>
+      <span>GreenGuard</span>
+    </div>
+    <div class="footer-links">
+      <a href="/login">Log in</a>
+      <a href="/signup">Sign up</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 GreenGuard. A smart tree health monitoring project.</div>
+  </footer>
 
 </div>
 </body>

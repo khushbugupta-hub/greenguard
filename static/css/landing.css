@@ -114,3 +114,56 @@
 @media (max-width: 480px) {
   .features-grid { grid-template-columns: 1fr; }
 }
+/* How It Works */
+.landing-how {
+  max-width: 1040px; margin: 0 auto; padding: 90px 24px;
+  border-top: 1px solid #e7e5df;
+}
+.landing-how .section-eyebrow, .landing-how h2 { text-align: center; }
+.landing-how h2 { font-size: 28px; font-weight: 600; letter-spacing: -0.5px; margin: 0 0 50px; }
+.how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.how-step { position: relative; }
+.how-num {
+  font-size: 13px; font-weight: 600; color: #3b6d11;
+  background: #eaf3de; width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+}
+.how-step h3 { font-size: 15px; font-weight: 600; margin: 0 0 8px; }
+.how-step p { font-size: 13.5px; color: #888780; line-height: 1.6; margin: 0; }
+
+/* About */
+.landing-about { background: #f1efe8; padding: 80px 24px; }
+.about-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+.landing-about .section-eyebrow { text-align: center; }
+.landing-about h2 { font-size: 26px; font-weight: 600; letter-spacing: -0.4px; margin: 0 0 18px; }
+.landing-about p { font-size: 14.5px; color: #5f5e5a; line-height: 1.75; margin: 0; }
+
+/* Final CTA */
+.landing-cta {
+  background: #173404; color: #eaf3de;
+  text-align: center; padding: 80px 24px;
+}
+.landing-cta h2 { font-size: 28px; font-weight: 600; letter-spacing: -0.5px; margin: 0 0 12px; color: #fff; }
+.landing-cta p { font-size: 15px; color: #c7dbb3; margin: 0 0 28px; }
+.btn-light { background: #eaf3de; color: #173404; }
+.btn-light:hover { background: #d9ecc4; }
+
+/* Footer */
+.landing-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+  padding: 28px 48px; border-top: 1px solid #e7e5df;
+  font-size: 13px; color: #888780;
+}
+.footer-brand { display: flex; align-items: center; gap: 8px; font-weight: 600; color: #1c1c1a; font-size: 14px; }
+.footer-brand .landing-brand-icon { width: 24px; height: 24px; }
+.footer-brand .landing-brand-icon svg { width: 13px; height: 13px; }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { color: #5f5e5a; text-decoration: none; }
+.footer-links a:hover { color: #1c1c1a; }
+
+@media (max-width: 800px) {
+  .how-grid { grid-template-columns: 1fr; gap: 40px; }
+  .landing-footer { flex-direction: column; text-align: center; }
+}
