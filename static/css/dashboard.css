@@ -315,3 +315,32 @@ tr:last-child td{ border-bottom:none; }
 }
 @keyframes spin{ to{ transform:rotate(360deg); } }
 .loading-overlay p{ color:#fff; font-size:14px; font-weight:600; }
+/* ==================== ICON SIZE POLISH (app-wide) ==================== */
+
+/* Stat card icon chips */
+.stat-icon{ width:44px; height:44px; }
+.stat-icon svg{ width:22px !important; height:22px !important; }
+
+/* Sidebar / navbar / auth brand logo */
+.brand-icon, .app-brand-icon, .auth-brand-icon{ width:38px; height:38px; }
+.brand-icon svg, .app-brand-icon svg, .auth-brand-icon svg{ width:20px !important; height:20px !important; }
+
+/* Big green leaf illustration box on dashboard */
+.leaf-panel svg{ width:96px !important; height:96px !important; }
+
+/* Upload cloud icon */
+.dropzone-icon{ width:44px !important; height:44px !important; }
+
+/* Scan with camera button icon */
+.scan-btn svg{ width:18px !important; height:18px !important; }
+
+/* Top-right avatar circle */
+.avatar-link, .avatar{ width:40px; height:40px; font-size:14px; }
+
+/* 404 / 500 error page icon */
+.error-page .icon svg{ width:64px !important; height:64px !important; }
+
+/* Back arrow on result page */
+.result-topbar svg{ width:18px !important; height:18px !important; }
+
+/* Admin dashboard stat icons (uses same .stat-icon, already covered above) */
