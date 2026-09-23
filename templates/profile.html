@@ -34,6 +34,7 @@
   .alert-msg { padding: 10px 14px; border-radius: 8px; margin-bottom: 16px; font-size: 0.9rem; }
   .alert-success { background: #e5f6ea; color: #1f5c33; }
   .alert-error { background: #fde8e8; color: #b3261e; }
+  .stat-icon svg, .brand-icon svg { width: 22px; height: 22px; }
   @media (max-width: 800px) { .profile-forms { grid-template-columns: 1fr; } }
 </style>
 </head>
@@ -41,7 +42,9 @@
 <div class="app">
   <aside class="sidebar">
     <div class="brand">
-      <div class="brand-icon">🌿</div>
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#eaf3de" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 11 13 11 11"/></svg>
+      </div>
       <div>
         <div class="brand-text-main">GreenGuard</div>
         <div class="brand-text-sub">Smart Tree Health Monitoring</div>
@@ -86,50 +89,10 @@
       <div class="stat-card">
         <div class="stat-top">
           <span class="stat-label">Total Predictions</span>
-          <div class="stat-icon icon-green">🌿</div>
+          <div class="stat-icon icon-green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 11 13 11 11"/></svg>
+          </div>
         </div>
         <p class="stat-value">{{ total_predictions|default(0) }}</p>
       </div>
       <div class="stat-card">
-        <div class="stat-top">
-          <span class="stat-label">Healthy Trees</span>
-          <div class="stat-icon icon-green">✔</div>
-        </div>
-        <p class="stat-value">{{ healthy_count|default(0) }}</p>
-      </div>
-      <div class="stat-card">
-        <div class="stat-top">
-          <span class="stat-label">Diseased Trees</span>
-          <div class="stat-icon icon-red">⚠</div>
-        </div>
-        <p class="stat-value">{{ diseased_count|default(0) }}</p>
-      </div>
-    </div>
-
-    <div class="profile-forms">
-      <div class="form-card">
-        <h3>Update Name</h3>
-        <form method="POST" action="/profile">
-          <input type="hidden" name="action" value="update_name">
-          <label>Full Name</label>
-          <input type="text" name="name" value="{{ user_name }}" required>
-          <button type="submit">Save Name</button>
-        </form>
-      </div>
-
-      <div class="form-card">
-        <h3>Change Password</h3>
-        <form method="POST" action="/profile">
-          <input type="hidden" name="action" value="change_password">
-          <label>Current Password</label>
-          <input type="password" name="current_password" required>
-          <label>New Password</label>
-          <input type="password" name="new_password" required minlength="6">
-          <button type="submit">Update Password</button>
-        </form>
-      </div>
-    </div>
-  </main>
-</div>
-</body>
-</html>

@@ -14,13 +14,17 @@
     text-decoration: none;
   }
   .avatar-link:hover { background: #164726; }
+  .stat-icon svg, .brand-icon svg, .leaf-panel svg { width: 22px; height: 22px; }
+  .leaf-panel svg { width: 40px; height: 40px; }
 </style>
 </head>
 <body>
 <div class="app">
   <aside class="sidebar">
     <div class="brand">
-      <div class="brand-icon">🌿</div>
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#eaf3de" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 11 13 11 11"/></svg>
+      </div>
       <div>
         <div class="brand-text-main">GreenGuard</div>
         <div class="brand-text-sub">Smart Tree Health Monitoring</div>
@@ -54,28 +58,36 @@
       <div class="stat-card">
         <div class="stat-top">
           <span class="stat-label">Total Predictions</span>
-          <div class="stat-icon icon-green">🌿</div>
+          <div class="stat-icon icon-green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 11 13 11 11"/></svg>
+          </div>
         </div>
         <p class="stat-value">{{ total_predictions|default(0) }}</p>
       </div>
       <div class="stat-card">
         <div class="stat-top">
           <span class="stat-label">Healthy Trees</span>
-          <div class="stat-icon icon-green">✔</div>
+          <div class="stat-icon icon-green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
         </div>
         <p class="stat-value">{{ healthy_count|default(0) }}</p>
       </div>
       <div class="stat-card">
         <div class="stat-top">
           <span class="stat-label">Diseased Trees</span>
-          <div class="stat-icon icon-red">⚠</div>
+          <div class="stat-icon icon-red">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
         </div>
         <p class="stat-value">{{ diseased_count|default(0) }}</p>
       </div>
       <div class="stat-card">
         <div class="stat-top">
           <span class="stat-label">Accuracy</span>
-          <div class="stat-icon icon-blue">◎</div>
+          <div class="stat-icon icon-blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a9 9 0 0 0-9 9c0 3.5 2 6.5 5 8l1-4-3-3 4-1 2-4 2 4 4 1-3 3 1 4c3-1.5 5-4.5 5-8a9 9 0 0 0-9-9Z"/></svg>
+          </div>
         </div>
         <p class="stat-value">{{ accuracy|default('92.4') }}%</p>
       </div>
@@ -92,7 +104,9 @@
         <div>or click to browse</div>
         <div class="dz-sub">JPG, JPEG, PNG (Max. 5MB)</div>
       </div>
-      <div class="leaf-panel">🍃</div>
+      <div class="leaf-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#3b6d11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 11 13 11 11"/></svg>
+      </div>
     </div>
 
     <div class="section-head">
