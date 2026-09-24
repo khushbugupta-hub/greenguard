@@ -96,3 +96,49 @@
         <p class="stat-value">{{ total_predictions|default(0) }}</p>
       </div>
       <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-label">Healthy Trees</span>
+          <div class="stat-icon icon-green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+        </div>
+        <p class="stat-value">{{ healthy_count|default(0) }}</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-label">Diseased Trees</span>
+          <div class="stat-icon icon-red">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+        </div>
+        <p class="stat-value">{{ diseased_count|default(0) }}</p>
+      </div>
+    </div>
+
+    <div class="profile-forms">
+      <div class="form-card">
+        <h3>Update Name</h3>
+        <form method="POST" action="/profile">
+          <input type="hidden" name="action" value="update_name">
+          <label>Full Name</label>
+          <input type="text" name="name" value="{{ user_name }}" required>
+          <button type="submit">Save Name</button>
+        </form>
+      </div>
+
+      <div class="form-card">
+        <h3>Change Password</h3>
+        <form method="POST" action="/profile">
+          <input type="hidden" name="action" value="change_password">
+          <label>Current Password</label>
+          <input type="password" name="current_password" required>
+          <label>New Password</label>
+          <input type="password" name="new_password" required minlength="6">
+          <button type="submit">Update Password</button>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>
