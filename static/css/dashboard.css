@@ -343,4 +343,62 @@ tr:last-child td{ border-bottom:none; }
 /* Back arrow on result page */
 .result-topbar svg{ width:18px !important; height:18px !important; }
 
-/* Admin dashboard stat icons (uses same .stat-icon, already covered above) */
+/* Admin dashboard stat icons (uses same .stat-icon, already covered above) */  
+/* ==================== INTERACTION POLISH (app-wide) ==================== */
+
+/* Card hover lift */
+.stat-card, .form-card, .feature, .result-card, .info-card, .upload-card {
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.stat-card:hover, .form-card:hover, .feature:hover, .result-card:hover, .info-card:hover, .upload-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(23,52,4,0.08);
+}
+
+/* Sidebar nav hover polish */
+.nav-item {
+  transition: background .15s ease, color .15s ease, padding-left .15s ease;
+}
+.nav-item:hover { padding-left: 18px; }
+
+/* Table row hover */
+tbody tr { transition: background .15s ease; }
+tbody tr:hover { background: #f4f8f2; }
+
+/* Primary buttons */
+.btn-primary {
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(23,52,4,0.18);
+}
+.btn-primary:active { transform: translateY(0); }
+
+/* Scan with camera button */
+.scan-btn {
+  transition: background .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+.scan-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(23,52,4,0.12);
+}
+
+/* Upload dropzone drag-over glow */
+.dropzone-big {
+  transition: border-color .15s ease, background .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+.dropzone-big.dragover {
+  transform: scale(1.01);
+  box-shadow: 0 0 0 4px rgba(59,109,17,0.12);
+}
+
+/* Confidence bar smooth fill */
+.confidence-fill, .sample-confidence-fill {
+  transition: width 1s ease;
+}
+
+/* Badges subtle entrance */
+.badge-healthy, .badge-disease, .badge-diseased, .sample-badge-diseased {
+  transition: transform .15s ease;
+}
