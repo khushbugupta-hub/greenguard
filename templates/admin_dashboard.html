@@ -100,5 +100,27 @@
     </div>
   </main>
 </div>
+<script>
+  document.querySelectorAll('.stat-value').forEach(function (el) {
+    var raw = el.textContent.trim();
+    var match = raw.match(/^([\d.]+)(.*)$/);
+    if (!match) return;
+    var end = parseFloat(match[1]);
+    var suffix = match[2] || '';
+    var isDecimal = match[1].indexOf('.') !== -1;
+    var duration = 900;
+    var startTime = null;
+    function tick(now) {
+      if (!startTime) startTime = now;
+      var progress = Math.min((now - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = end * eased;
+      el.textContent = (isDecimal ? current.toFixed(1) : Math.round(current)) + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+      else el.textContent = raw;
+    }
+    requestAnimationFrame(tick);
+  });
+</script>
 </body>
 </html>
